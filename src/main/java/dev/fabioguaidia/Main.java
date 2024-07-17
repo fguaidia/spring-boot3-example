@@ -3,6 +3,7 @@ package dev.fabioguaidia;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,9 +17,10 @@ public class Main {
     }
 
     @GetMapping("/greet")
-    public GreetResponse greet() {
+    public GreetResponse greet(@RequestParam(value = "name", required = false)  String name) {
+        String greetMessage = name == null || name.isBlank() ? "Hello!": "Hello " + name + "!";
         return new GreetResponse(
-                "Hello World",
+                greetMessage,
                 List.of("java","go","rust"),
                 new Person("Fabio", 30, 10_000));
     }

@@ -2,12 +2,16 @@ package dev.fabioguaidia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class Main {
 
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        ConfigurableApplicationContext applicationContext = SpringApplication.run(Main.class, args);
+        for (String beanDefinitionName : applicationContext.getBeanDefinitionNames()) {
+            System.out.println(beanDefinitionName);
+        }
     }
 
 }

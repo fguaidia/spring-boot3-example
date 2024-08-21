@@ -1,5 +1,6 @@
 package dev.fabioguaidia.customer;
 
+import dev.fabioguaidia.exception.ResourceNotFound;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class CustomerService {
     public Customer getCustomer(Integer customerId) {
         return customerDao.selectCustomerById(customerId)
                 .orElseThrow(
-                    () -> new IllegalArgumentException("Customer with id [%s] not found".formatted(customerId))
+                    () -> new ResourceNotFound("Customer with id [%s] not found".formatted(customerId))
                 );
     }
 
